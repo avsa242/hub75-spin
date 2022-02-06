@@ -5,7 +5,7 @@
     Description: Driver for HUB75 RGB LED matrix displays
     Copyright (c) 2022
     Started: Oct 24, 2021
-    Updated: Jan 25, 2022
+    Updated: Feb 6, 2022
     See end of file for terms of use.
     --------------------------------------------
 }
@@ -21,10 +21,7 @@ CON
 VAR
 
     long _eng_stack[50]
-    long _ptr_drawbuffer
     long _bl, _clk, _lat
-    word _disp_width, _disp_height, _disp_xmax, _disp_ymax, _buff_sz
-    word _bytesperln
     byte _rgbio, _addr
     byte _vsync
     byte _cog
@@ -99,14 +96,15 @@ PUB MirrorH(m)
 PUB MirrorV(m)
 ' dummy method
 
+PUB Plot(x, y, color) | tmp
+' Plot pixel at (x, y) in color
+    if (x < 0 or x > _disp_xmax) or (y < 0 or y > _disp_ymax)
+        return                                  ' coords out of bounds, ignore
 #ifdef GFX_DIRECT
-PUB Plot(x, y, color)
-' Draw a pixel at (x, y) in color (direct to display)
-
+' direct to display
+'   (not implemented)
 #else
-
-PUB Plot(x, y, color)
-' Draw a pixel at (x, y) in color (buffered)
+' buffered display
     byte[_ptr_drawbuffer][x + (y * _disp_width)] := color
 #endif
 
