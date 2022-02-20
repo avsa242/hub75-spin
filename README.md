@@ -7,7 +7,7 @@ This is a P8X32A/Propeller, P2X8C4M64P/Propeller 2 driver object for HUB75 RGB L
 
 ## Salient Features
 
-* 3bpp color (7 colors)
+* 3bpp color (8 colors)
 * Integration with generic bitmap graphics library
 
 ## Requirements
@@ -26,23 +26,23 @@ P2/SPIN2:
 
 ## Compiler Compatibility
 
-* P1/SPIN1 OpenSpin (bytecode): OK, tested with 1.00.81
-* P1/SPIN1 FlexSpin (bytecode): OK, tested with 5.9.4-beta
-* P1/SPIN1 FlexSpin (native): OK, tested with 5.9.4-beta
-* ~~P2/SPIN2 FlexSpin (bytecode): FTBFS, tested with 5.9.4-beta~~
-* P2/SPIN2 FlexSpin (native): OK, tested with 5.9.4-beta
+* P1/SPIN1 OpenSpin (bytecode): Untested (deprecated)
+* P1/SPIN1 FlexSpin (bytecode): OK, tested with 5.9.9-beta
+* P1/SPIN1 FlexSpin (native): OK, tested with 5.9.9-beta
+* ~~P2/SPIN2 FlexSpin (nu-code): FTBFS, tested with 5.9.9-beta~~
+* P2/SPIN2 FlexSpin (native): OK, tested with 5.9.9-beta
 * ~~BST~~ (incompatible - no preprocessor)
 * ~~Propeller Tool~~ (incompatible - no preprocessor)
 * ~~PNut~~ (incompatible - no preprocessor)
 
 ## Hardware Compatibility
 
-* Tested using Adafruit 64x32 panel (*NOTE: Due to the many variations of components used on these panels, the driver may not work for all without modification*)
+* Tested using Adafruit 64x32 panel (*NOTE: Due to the many variations of components used on these panels, the driver may not work for all without modification*) - tested up to 180MHz Fsys on P2 (display was somewhat unstable at this speed)
 
 ## Limitations
 
 * Very early in development - may malfunction, or outright fail to build
 * No brightness support
 * No support for higher color depths
-* Driver is currently written in spin (too slow to be of practical use when compiled as bytecode; building to native code using FlexSpin is highly recommended)
+* Driver is currently written in spin (too slow to be of practical use when compiled as bytecode on P1; building to native code using FlexSpin is highly recommended)
 
