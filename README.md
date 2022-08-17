@@ -16,24 +16,26 @@ This is a P8X32A/Propeller, P2X8C4M64P/Propeller 2 driver object for HUB75 RGB L
 
 P1/SPIN1:
 * spin-standard-library
-* presence of lib.gfx.bitmap.spin
+* lib.gfx.bitmap.spin (provided by spin-standard-library)
 * 1 extra core/cog for the HUB75 engine
 
 P2/SPIN2:
 * p2-spin-standard-library
-* presence of lib.gfx.bitmap.spin2
+* lib.gfx.bitmap.spin2 (provided by p2-spin-standard-library)
 * 1 extra core/cog for the HUB75 engine
 
 ## Compiler Compatibility
 
-* P1/SPIN1 OpenSpin (bytecode): Untested (deprecated)
-* P1/SPIN1 FlexSpin (bytecode): OK, tested with 5.9.9-beta
-* P1/SPIN1 FlexSpin (native): OK, tested with 5.9.9-beta
-* ~~P2/SPIN2 FlexSpin (nu-code): FTBFS, tested with 5.9.9-beta~~
-* P2/SPIN2 FlexSpin (native): OK, tested with 5.9.9-beta
-* ~~BST~~ (incompatible - no preprocessor)
-* ~~Propeller Tool~~ (incompatible - no preprocessor)
-* ~~PNut~~ (incompatible - no preprocessor)
+| Processor | Language | Compiler               | Backend     | Status                |
+|-----------|----------|------------------------|-------------|-----------------------|
+| P1        | SPIN1    | FlexSpin (5.9.14-beta) | Bytecode    | OK                    |
+| P1        | SPIN1    | FlexSpin (5.9.14-beta) | Native code | OK                    |
+| P1        | SPIN1    | OpenSpin (1.00.81)     | Bytecode    | Untested (deprecated) |
+| P2        | SPIN2    | FlexSpin (5.9.14-beta) | NuCode      | FTBFS                 |
+| P2        | SPIN2    | FlexSpin (5.9.14-beta) | Native code | OK                    |
+| P1        | SPIN1    | Brad's Spin Tool (any) | Bytecode    | Unsupported           |
+| P1, P2    | SPIN1, 2 | Propeller Tool (any)   | Bytecode    | Unsupported           |
+| P1, P2    | SPIN1, 2 | PNut (any)             | Bytecode    | Unsupported           |
 
 ## Hardware Compatibility
 
