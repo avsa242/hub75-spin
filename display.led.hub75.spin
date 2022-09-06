@@ -5,7 +5,7 @@
     Description: Driver for HUB75 RGB LED matrix displays
     Copyright (c) 2022
     Started: Oct 24, 2021
-    Updated: Aug 17, 2022
+    Updated: Sep 6, 2022
     See end of file for terms of use.
     --------------------------------------------
 }
@@ -17,9 +17,6 @@ CON
 
     BYTESPERPX  = 1
     MAX_COLOR   = 7
-
-    { character attributes }
-    DRAWBG      = (1 << 0)
 
 VAR
 
@@ -33,10 +30,10 @@ OBJ
 
     time    : "time"
 
-PUB Null{}
+PUB null{}
 ' This is not a top-level object
 
-PUB Startx(RGB_BASEPIN, ADDR_BASEPIN, BLPIN, CLKPIN, LATPIN, WIDTH, HEIGHT, PTR_DISP): status
+PUB startx(RGB_BASEPIN, ADDR_BASEPIN, BLPIN, CLKPIN, LATPIN, WIDTH, HEIGHT, PTR_DISP): status
 ' Start using custom I/O settings
 '   RGB_BASEPIN: starting (lowest) pin of 6 contiguous RGB data pins
 '       (LSB..MSB: R0, G0, B0, R1, G1, B1)
@@ -71,7 +68,7 @@ PUB Startx(RGB_BASEPIN, ADDR_BASEPIN, BLPIN, CLKPIN, LATPIN, WIDTH, HEIGHT, PTR_
     ' Lastly - make sure you have at least one free core/cog
     return FALSE
 
-PUB Stop{}
+PUB stop{}
 ' Stop engine, clear variable space
     if _cog
         cogstop(_cog-1)
@@ -79,7 +76,7 @@ PUB Stop{}
         wordfill(@_disp_width, 0, 6)
         bytefill(@_rgbio, 0, 4)
 
-PUB Address(addr): curr_addr
+PUB address(addr): curr_addr
 ' Set framebuffer/display buffer address
     case addr
         $0004..$7FFF-_buff_sz:
@@ -88,18 +85,18 @@ PUB Address(addr): curr_addr
             return _ptr_drawbuffer
 
 #ifndef GFX_DIRECT
-PUB Clear{}
+PUB clear{}
 ' Clear the display buffer
     bytefill(_ptr_drawbuffer, _bgcolor, _buff_sz)
 #endif
 
-PUB MirrorH(m)
+PUB mirrorh(m)
 ' dummy method
 
-PUB MirrorV(m)
+PUB mirrorv(m)
 ' dummy method
 
-PUB Plot(x, y, color) | tmp
+PUB plot(x, y, color) | tmp
 ' Plot pixel at (x, y) in color
     if (x < 0 or x > _disp_xmax) or (y < 0 or y > _disp_ymax)
         return                                  ' coords out of bounds, ignore
@@ -112,7 +109,7 @@ PUB Plot(x, y, color) | tmp
 #endif
 
 #ifndef GFX_DIRECT
-PUB Point(x, y): pix_clr
+PUB point(x, y): pix_clr
 ' Get color of pixel at x, y
     x := 0 #> x <# _disp_xmax
     y := 0 #> y <# _disp_ymax
@@ -120,10 +117,10 @@ PUB Point(x, y): pix_clr
     return byte[_ptr_drawbuffer][x + (y * _disp_width)]
 #endif
 
-PUB Update{}
+PUB update{}
 ' dummy method
 
-PRI HUB75_Engine{} | r0, g0, b0, r1, g1, b1, a, b, c, d, bl, clk, lat, tmp, {
+PRI hub75_engine{} | r0, g0, b0, r1, g1, b1, a, b, c, d, bl, clk, lat, tmp, {
 } y, x, ty_offs, by_offs, top_offs, bot_offs, bnkht
 ' HUB75 engine (secondary cog)
     repeat until _lat                           ' wait until all vars are set
@@ -161,7 +158,7 @@ PRI HUB75_Engine{} | r0, g0, b0, r1, g1, b1, a, b, c, d, bl, clk, lat, tmp, {
 '            time.usleep(1)
 
 #ifndef GFX_DIRECT
-PRI memFill(xs, ys, val, count)
+PRI memfill(xs, ys, val, count)
 ' Fill region of display buffer memory
 '   xs, ys: Start of region
 '   val: Color

@@ -12,7 +12,7 @@ This is a P8X32A/Propeller, P2X8C4M64P/Propeller 2 driver object for HUB75 RGB L
 
 ## Requirements
 
-* 2kB for display buffer
+* # kB for display buffer, where # == panel width * height (e.g., 64x32 = 2048, or 2kBytes)
 
 P1/SPIN1:
 * spin-standard-library
@@ -28,8 +28,8 @@ P2/SPIN2:
 
 | Processor | Language | Compiler               | Backend     | Status                |
 |-----------|----------|------------------------|-------------|-----------------------|
-| P1        | SPIN1    | FlexSpin (5.9.14-beta) | Bytecode    | OK                    |
-| P1        | SPIN1    | FlexSpin (5.9.14-beta) | Native code | OK                    |
+| P1        | SPIN1    | FlexSpin (5.9.14-beta) | Bytecode    | OK (not recommended)  |
+| P1        | SPIN1    | FlexSpin (5.9.14-beta) | Native code | OK (recommended)      |
 | P1        | SPIN1    | OpenSpin (1.00.81)     | Bytecode    | Untested (deprecated) |
 | P2        | SPIN2    | FlexSpin (5.9.14-beta) | NuCode      | FTBFS                 |
 | P2        | SPIN2    | FlexSpin (5.9.14-beta) | Native code | OK                    |
