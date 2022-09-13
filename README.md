@@ -12,7 +12,7 @@ This is a P8X32A/Propeller, P2X8C4M64P/Propeller 2 driver object for HUB75 RGB L
 
 ## Requirements
 
-* # kB for display buffer, where # == panel width * height (e.g., 64x32 = 2048, or 2kBytes)
+* x kB for display buffer, where x == panel width * height (e.g., 64x32 = 2048, or 2kBytes)
 
 P1/SPIN1:
 * spin-standard-library
