@@ -16,12 +16,12 @@ This is a P8X32A/Propeller, P2X8C4M64P/Propeller 2 driver object for HUB75 RGB L
 
 P1/SPIN1:
 * spin-standard-library
-* lib.gfx.bitmap.spin (provided by spin-standard-library)
+* graphics.common.spinh (provided by spin-standard-library)
 * 1 extra core/cog for the HUB75 engine
 
 P2/SPIN2:
 * p2-spin-standard-library
-* lib.gfx.bitmap.spin2 (provided by p2-spin-standard-library)
+* graphics.common.spin2h (provided by p2-spin-standard-library)
 * 1 extra core/cog for the HUB75 engine
 
 ## Compiler Compatibility
