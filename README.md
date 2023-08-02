@@ -26,24 +26,23 @@ P2/SPIN2:
 
 ## Compiler Compatibility
 
-| Processor | Language | Compiler               | Backend     | Status                |
-|-----------|----------|------------------------|-------------|-----------------------|
-| P1        | SPIN1    | FlexSpin (5.9.14-beta) | Bytecode    | OK (not recommended)  |
-| P1        | SPIN1    | FlexSpin (5.9.14-beta) | Native code | OK (recommended)      |
-| P1        | SPIN1    | OpenSpin (1.00.81)     | Bytecode    | Untested (deprecated) |
-| P2        | SPIN2    | FlexSpin (5.9.14-beta) | NuCode      | FTBFS                 |
-| P2        | SPIN2    | FlexSpin (5.9.14-beta) | Native code | OK                    |
-| P1        | SPIN1    | Brad's Spin Tool (any) | Bytecode    | Unsupported           |
-| P1, P2    | SPIN1, 2 | Propeller Tool (any)   | Bytecode    | Unsupported           |
-| P1, P2    | SPIN1, 2 | PNut (any)             | Bytecode    | Unsupported           |
+| Processor | Language | Compiler               | Backend      | Status                |
+|-----------|----------|------------------------|--------------|-----------------------|
+| P1        | SPIN1    | FlexSpin (6.2.1)       | Bytecode     | OK (not recommended)  |
+| P1        | SPIN1    | FlexSpin (6.2.1)       | Native/PASM  | OK (recommended)      |
+| P2        | SPIN2    | FlexSpin (6.2.1)       | NuCode       | FTBFS                 |
+| P2        | SPIN2    | FlexSpin (6.2.1)       | Native/PASM2 | OK                    |
+
+(other versions or toolchains not listed are not supported, and _may or may not_ work)
+
 
 ## Hardware Compatibility
 
-* Tested using Adafruit 64x32 panel (*NOTE: Due to the many variations of components used on these panels, the driver may not work for all without modification*) - tested up to 180MHz Fsys on P2 (display was somewhat unstable at this speed)
+* Tested using Adafruit 64x32 panel (*NOTE: Due to the many variations of components used on these panels, the driver may not work for all without modification*)
+* Tested up to 180MHz Fsys on P2 (display was somewhat unstable at this speed)
 
 ## Limitations
 
-* Very early in development - may malfunction, or outright fail to build
 * No brightness support
 * No support for higher color depths
 * Driver is currently written in spin (too slow to be of practical use when compiled as bytecode on P1; building to native code using FlexSpin is highly recommended)
