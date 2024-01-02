@@ -7,7 +7,7 @@ This is a P8X32A/Propeller, P2X8C4M64P/Propeller 2 driver object for HUB75 RGB L
 
 ## Salient Features
 
-* 3bpp color (8 colors)
+* 3bpp color (8 colors), treated internally as 8-bit format
 * Integration with generic bitmap graphics library
 
 ## Requirements
@@ -28,10 +28,10 @@ P2/SPIN2:
 
 | Processor | Language | Compiler               | Backend      | Status                |
 |-----------|----------|------------------------|--------------|-----------------------|
-| P1        | SPIN1    | FlexSpin (6.5.0)       | Bytecode     | OK (not recommended)  |
-| P1        | SPIN1    | FlexSpin (6.5.0)       | Native/PASM  | OK (recommended)      |
-| P2        | SPIN2    | FlexSpin (6.5.0)       | NuCode       | FTBFS                 |
-| P2        | SPIN2    | FlexSpin (6.5.0)       | Native/PASM2 | OK                    |
+| P1        | SPIN1    | FlexSpin (6.8.0)       | Bytecode     | OK (not recommended)  |
+| P1        | SPIN1    | FlexSpin (6.8.0)       | Native/PASM  | OK (recommended)      |
+| P2        | SPIN2    | FlexSpin (6.8.0)       | NuCode       | OK (untested)         |
+| P2        | SPIN2    | FlexSpin (6.8.0)       | Native/PASM2 | OK                    |
 
 (other versions or toolchains not listed are not supported, and _may or may not_ work)
 
