@@ -1,12 +1,12 @@
 {
----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
     Filename:       display.led.hub75.spin
     Description:    Driver for HUB75 RGB LED matrix displays
     Author:         Jesse Burt
     Started:        Oct 24, 2021
-    Updated:        Jan 28, 2024
+    Updated:        Aug 19, 2024
     Copyright (c) 2024 - See end of file for terms of use.
----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 }
 
 #define MEMMV_NATIVE bytemove
@@ -36,6 +36,7 @@ CON
     CENTERY     = HEIGHT/2
     BPL         = WIDTH*BYTESPERPX
 
+
 VAR
 
     long _eng_stack[50]
@@ -46,16 +47,20 @@ VAR
     byte _vsync
     byte _cog
 
+
 OBJ
 
     time    : "time"
 
-PUB null{}
+
+PUB null()
 ' This is not a top-level object
+
 
 PUB start(): status
 ' Start the driver using default settings
     return startx(RGB_BASE, ADDR_BASE, BL, CLK, LAT, WIDTH, HEIGHT, @_framebuffer)
+
 
 PUB startx(RGB_BASEPIN, ADDR_BASEPIN, BLPIN, CLKPIN, LATPIN, DISP_W, DISP_H, PTR_DISP=0): status
 ' Start using custom I/O settings
@@ -70,9 +75,9 @@ PUB startx(RGB_BASEPIN, ADDR_BASEPIN, BLPIN, CLKPIN, LATPIN, DISP_W, DISP_H, PTR
 '   WIDTH, HEIGHT: dimensions of RGB matrix display, in pixels
 '   PTR_DISP: pointer to display buffer
 '       (must be at least (WIDTH * HEIGHT) bytes)
-    if ( lookdown(RGB_BASEPIN: 0..25) and lookdown(ADDR_BASEPIN: 0..27) and ...
-        lookdown(BLPIN: 0..31) and lookdown(CLKPIN: 0..31) and lookdown(LATPIN: 0..31) )
-        if ( _cog := status := (cognew(hub75_engine{}, @_eng_stack) + 1) )
+    if (    lookdown(RGB_BASEPIN: 0..25) and lookdown(ADDR_BASEPIN: 0..27) and ...
+            lookdown(BLPIN: 0..31) and lookdown(CLKPIN: 0..31) and lookdown(LATPIN: 0..31) )
+        if ( _cog := status := (cognew(hub75_engine(), @_eng_stack) + 1) )
             set_dims(DISP_W, DISP_H)
 
             _rgbio := RGB_BASEPIN
@@ -86,7 +91,8 @@ PUB startx(RGB_BASEPIN, ADDR_BASEPIN, BLPIN, CLKPIN, LATPIN, DISP_W, DISP_H, PTR
     ' Lastly - make sure you have at least one free core/cog
     return FALSE
 
-PUB stop{}
+
+PUB stop()
 ' Stop engine, clear variable space
     if ( _cog )
         cogstop(_cog-1)
@@ -94,11 +100,13 @@ PUB stop{}
         wordfill(@_disp_width, 0, 6)
         bytefill(@_rgbio, 0, 4)
 
+
 #ifndef GFX_DIRECT
-PUB clear{}
+PUB clear()
 ' Clear the display buffer
     bytefill(_ptr_drawbuffer, _bgcolor, _buff_sz)
 #endif
+
 
 PUB plot(x, y, color) | tmp
 ' Plot pixel at (x, y) in color
@@ -112,6 +120,7 @@ PUB plot(x, y, color) | tmp
     byte[_ptr_drawbuffer][x + (y * _disp_width)] := color
 #endif
 
+
 #ifndef GFX_DIRECT
 PUB point(x, y): pix_clr
 ' Get color of pixel at x, y
@@ -121,11 +130,13 @@ PUB point(x, y): pix_clr
     return byte[_ptr_drawbuffer][x + (y * _disp_width)]
 #endif
 
-PUB show{}
+
+PUB show()
 ' dummy method for compatibility with other drivers
 
-PRI hub75_engine{} | r0, g0, b0, r1, g1, b1, a, b, c, d, bl, clk, lat, tmp, {
-} y, x, ty_offs, by_offs, top_offs, bot_offs, bnkht
+
+PRI hub75_engine() |    r0, g0, b0, r1, g1, b1, a, b, c, d, bl, clk, lat, tmp, y, x, ty_offs, ...
+                        by_offs, top_offs, bot_offs, bnkht
 ' HUB75 engine (secondary cog)
     repeat until _lat                           ' wait until all vars are set
 

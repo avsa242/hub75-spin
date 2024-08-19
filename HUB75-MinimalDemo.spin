@@ -1,18 +1,18 @@
 {
-    --------------------------------------------
-    Filename: HUB75-MinimalDemo.spin
-    Description: Demo of the HUB75 driver
+----------------------------------------------------------------------------------------------------
+    Filename:       HUB75-MinimalDemo.spin
+    Description:    Demo of the HUB75 driver
         * Minimal code example
-    Author: Jesse Burt
-    Copyright (c) 2024
-    Started: Jan 2, 2024
-    Updated: Jan 2, 2024
-    See end of file for terms of use.
-    --------------------------------------------
+    Author:         Jesse Burt
+    Started:        Jan 2, 2024
+    Updated:        Aug 19, 2024
+    Copyright (c) 2024 - See end of file for terms of use.
+----------------------------------------------------------------------------------------------------
 
     NOTE: It is strongly advised to build this demo using FlexSpin's PASM backend,
         as opposed to the bytecode backend. With the latter, the display is prone to flicker.
 }
+
 CON
 
     _clkmode    = xtal1+pll16x
