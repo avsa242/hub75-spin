@@ -4,8 +4,8 @@
     Description:    Driver for HUB75 RGB LED matrix displays
     Author:         Jesse Burt
     Started:        Oct 24, 2021
-    Updated:        Aug 19, 2024
-    Copyright (c) 2024 - See end of file for terms of use.
+    Updated:        Feb 7, 2025
+    Copyright (c) 2025 - See end of file for terms of use.
 ----------------------------------------------------------------------------------------------------
 }
 
@@ -17,9 +17,6 @@
 
 CON
 
-    BYTESPERPX  = 1
-    MAX_COLOR   = 7
-
     { default I/O settings - can be overridden by the parent object }
     WIDTH       = 64
     HEIGHT      = 32
@@ -30,11 +27,16 @@ CON
     BL          = 12
 
 
+    ' actually 3bpp color, but each pixel requires a byte, so calculate for 8bpp
+    BPP         = 8                             ' bits per pixel/color depth of the display
+    BYTESPERPX  = 1 #> (BPP/8)                  ' limit to minimum of 1
+    BPPDIV      = BYTESPERPX #> (8 / BPP)       ' limit to range BYTESPERPX .. (8/BPP)
+    BUFF_SZ     = (WIDTH * HEIGHT) / BPPDIV
+    MAX_COLOR   = (1 << BPP)-1
     XMAX        = WIDTH-1
     YMAX        = HEIGHT-1
     CENTERX     = WIDTH/2
     CENTERY     = HEIGHT/2
-    BPL         = WIDTH*BYTESPERPX
 
 
 VAR
@@ -42,7 +44,7 @@ VAR
     long _eng_stack[50]
     long _bl, _clk, _lat
 
-    byte _framebuffer[(WIDTH*HEIGHT)]
+    byte _framebuffer[BUFF_SZ]
     byte _rgbio, _addr
     byte _vsync
     byte _cog
@@ -50,7 +52,7 @@ VAR
 
 OBJ
 
-    time    : "time"
+    time:   "time"
 
 
 PUB null()
@@ -183,7 +185,7 @@ PRI memfill(xs, ys, val, count)
 
 DAT
 {
-Copyright 2024 Jesse Burt
+Copyright 2025 Jesse Burt
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction,
